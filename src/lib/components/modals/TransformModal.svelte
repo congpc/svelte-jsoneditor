@@ -34,6 +34,7 @@
   import Modal from './Modal.svelte'
   import { onMount } from 'svelte'
   import { createHistoryInstance } from '$lib/logic/history'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:TransformModal')
 
@@ -172,7 +173,6 @@
 
     debug('store state in memory', stateId, transformModalStates[stateId])
   }
-
   function handleTransform() {
     if (selectedJson === undefined) {
       previewContent = { text: '' }
@@ -255,29 +255,29 @@
         <div class="jse-main-contents">
           <div class="jse-query-contents">
             <div class="jse-label">
-              <div class="jse-label-inner">Language</div>
+              <div class="jse-label-inner">{$t('modals.language')}</div>
             </div>
             <div class="jse-description">
               <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-              {@html getSelectedQueryLanguage(queryLanguageId).description}
+              {@html $t(`modals.${queryLanguageId}_description`)}
             </div>
 
             <div class="jse-label">
-              <div class="jse-label-inner">Path</div>
+              <div class="jse-label-inner">{$t('modals.path')}</div>
             </div>
             <input
               class="jse-path"
               type="text"
               readonly
-              title="Selected path"
-              value={!isEmpty(rootPath) ? stringifyJSONPath(rootPath) : '(document root)'}
+              title={$t('modals.selected_path')}
+              value={!isEmpty(rootPath) ? stringifyJSONPath(rootPath) : $t('modals.document_root')}
             />
 
             <div class="jse-label">
               <div class="jse-label-inner">
                 <button type="button" on:click={toggleShowWizard}>
                   <Icon data={showWizard ? faCaretDown : faCaretRight} />
-                  Wizard
+                  {$t('modals.wizard')}
                 </button>
               </div>
             </div>
@@ -294,12 +294,12 @@
                   </div>
                 {/if}
               {:else}
-                (Only available for arrays, not for objects)
+                {$t('modals.wizard_description')}
               {/if}
             {/if}
 
             <div class="jse-label">
-              <div class="jse-label-inner">Query</div>
+              <div class="jse-label-inner">{$t('modals.query')}</div>
             </div>
             <textarea
               bind:this={refQueryInput}
@@ -314,7 +314,7 @@
                 <div class="jse-label-inner">
                   <button type="button" on:click={toggleShowOriginal}>
                     <Icon data={showOriginal ? faCaretDown : faCaretRight} />
-                    Original
+                    {$t('modals.original')}
                   </button>
                 </div>
               </div>
@@ -354,7 +354,7 @@
             </div>
             <div class="jse-preview-data">
               <div class="jse-label">
-                <div class="jse-label-inner">Preview</div>
+                <div class="jse-label-inner">{$t('modals.preview')}</div>
               </div>
               {#if !previewError}
                 <TreeMode
@@ -405,7 +405,7 @@
             use:focus
             disabled={!!previewError}
           >
-            Transform
+            {$t('modals.transform')}
           </button>
         </div>
       </div>

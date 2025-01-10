@@ -164,6 +164,7 @@
   import createTreeContextMenuItems from './contextmenu/createTreeContextMenuItems'
   import { toRecursiveSearchResults as toRecursiveSearchResults } from 'svelte-jsoneditor/logic/search.js'
   import { isTreeHistoryItem } from 'svelte-jsoneditor'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:TreeMode')
 
@@ -384,7 +385,7 @@
           newValidationErrorList = [
             {
               path: [],
-              message: 'Failed to validate: ' + (err as Error).message,
+              message: $t('modes.failed_to_validate') + (err as Error).message,
               severity: ValidationSeverity.warning
             }
           ]
@@ -600,7 +601,7 @@
     debug('patch', operations, afterPatch)
 
     if (json === undefined) {
-      throw new Error('Cannot apply patch: no JSON')
+      throw new Error($t('modes.error_no_json'))
     }
 
     const previousJson = json
@@ -871,7 +872,7 @@
     }
 
     if (!canConvert(selection)) {
-      onError(new Error(`Cannot convert current selection to ${type}`))
+      onError(new Error(`${$t('modes.error_convert_selection')} ${type}`))
       return
     }
 
@@ -1660,9 +1661,7 @@
     }
 
     const props = {
-      tip: showTip
-        ? 'Tip: you can open this context menu via right-click or with Ctrl+Q'
-        : undefined,
+      tip: showTip ? $t('modes.menu_tip') : undefined,
       items,
       onRequestClose: () => closeAbsolutePopup(popupId)
     }
@@ -1926,13 +1925,13 @@
       {:else}
         <Message
           type="error"
-          message="The loaded JSON document is invalid and could not be repaired automatically."
+          message={$t('modes.repair_error')}
           actions={!readOnly
             ? [
                 {
                   icon: faCode,
-                  text: 'Repair manually',
-                  title: 'Open the document in "code" mode and repair it manually',
+                  text: $t('modes.repair_manual'),
+                  title: $t('modes.repair_error_manual_title'),
                   onClick: handleRequestRepair
                 }
               ]
@@ -1975,14 +1974,16 @@
       {#if pastedJson}
         <Message
           type="info"
-          message={`You pasted a JSON ${
-            Array.isArray(pastedJson.contents) ? 'array' : 'object'
-          } as text`}
+          message={`${$t('modes.error_pasted_json_1')} ${
+            Array.isArray(pastedJson.contents)
+              ? $t('modes.error_pasted_json_2')
+              : $t('modes.error_pasted_json_3')
+          } ${$t('modes.error_pasted_json_4')}`}
           actions={[
             {
               icon: faWrench,
-              text: 'Paste as JSON instead',
-              title: 'Replace the value with the pasted JSON',
+              text: $t('modes.paste_as_json'),
+              title: $t('modes.paste_as_replace_title'),
               // We use mousedown here instead of click: this message pops up
               // whilst the user is editing a value. When clicking this button,
               // the actual value is applied and the event is not propagated
@@ -1990,8 +1991,8 @@
               onMouseDown: handleParsePastedJson
             },
             {
-              text: 'Leave as is',
-              title: 'Keep the JSON embedded in the value',
+              text: $t('modes.leave_as_is'),
+              title: $t('modes.leave_as_value_title'),
               onClick: handleClearPastedJson
             }
           ]}
@@ -2001,19 +2002,19 @@
       {#if textIsRepaired}
         <Message
           type="success"
-          message="The loaded JSON document was invalid but is successfully repaired."
+          message={$t('modes.table_repair_success')}
           actions={!readOnly
             ? [
                 {
                   icon: faCheck,
-                  text: 'Ok',
-                  title: 'Accept the repaired document',
+                  text: $t('modes.ok'),
+                  title: $t('modes.ok_title'),
                   onClick: acceptAutoRepair
                 },
                 {
                   icon: faCode,
-                  text: 'Repair manually instead',
-                  title: 'Leave the document unchanged and repair it manually instead',
+                  text: $t('modes.repair_manual'),
+                  title: $t('modes.repair_manual_title'),
                   onClick: handleRequestRepair
                 }
               ]
@@ -2030,7 +2031,7 @@
   {:else}
     <div class="jse-contents">
       <div class="jse-loading-space"></div>
-      <div class="jse-loading">loading...</div>
+      <div class="jse-loading">{$t('modes.loading')}</div>
     </div>
   {/if}
 </div>

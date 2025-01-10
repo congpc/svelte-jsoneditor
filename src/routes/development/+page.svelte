@@ -162,6 +162,12 @@
     { value: 'jse-theme-custom-contents', label: 'custom-contents' }
   ]
 
+  const languages = [
+    { value: 'en', label: 'English' },
+    { value: 'ja', label: '日本語' },
+    { value: 'zh', label: '中國人' }
+  ]
+
   const indentations = [
     { value: 2, label: '2 spaces' },
     { value: 3, label: '3 spaces' },
@@ -262,6 +268,7 @@
     true
   )
   const selectedTheme = useLocalStorage('svelte-jsoneditor-demo-theme', themes[0].value)
+  const selectedLanguage = useLocalStorage('svelte-jsoneditor-demo-language', languages[0].value)
   const selectedIndentation = useLocalStorage(
     'svelte-jsoneditor-demo-indentation',
     indentations[0].value
@@ -304,7 +311,6 @@
     if (!import.meta.env.SSR) {
       console.log('onRenderMenu', mode, items)
     }
-
     return items
   }
 
@@ -383,6 +389,15 @@
     }
   }
 
+  function refreshLanguage() {
+    if (refTreeEditor) {
+      refTreeEditor.setLocaleLanguage($selectedLanguage)
+    }
+    if (refTextEditor) {
+      refTextEditor.setLocaleLanguage($selectedLanguage)
+    }
+  }
+
   function generateLongArray() {
     return [...new Array(1000)].map((value, index) => {
       const random = Math.round(Math.random() * 1000)
@@ -452,6 +467,8 @@
     }
     reader.readAsText(file)
   }
+
+  refreshLanguage()
 </script>
 
 <svelte:head>
@@ -478,6 +495,13 @@
       Theme: <select bind:value={$selectedTheme} on:change={refresh}>
         {#each themes as theme}
           <option value={theme.value}>{theme.label}</option>
+        {/each}
+      </select>
+    </label>
+    <label>
+      Language: <select bind:value={$selectedLanguage} on:change={refreshLanguage}>
+        {#each languages as language}
+          <option value={language.value}>{language.label}</option>
         {/each}
       </select>
     </label>
@@ -732,6 +756,7 @@
               bind:content
               bind:selection={selectionTree}
               bind:mode={leftEditorMode}
+              localeLanguage={$selectedLanguage}
               mainMenuBar={$mainMenuBar}
               navigationBar={$navigationBar}
               statusBar={$statusBar}
@@ -795,6 +820,7 @@
               mode={Mode.text}
               bind:content
               bind:selection={selectionText}
+              localeLanguage={$selectedLanguage}
               mainMenuBar={$mainMenuBar}
               navigationBar={$navigationBar}
               statusBar={$statusBar}

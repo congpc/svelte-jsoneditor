@@ -9,6 +9,7 @@
   import { findNestedArrays } from '$lib/logic/table.js'
   import { isEmpty } from 'lodash-es'
   import { stringifyJSONPath } from '$lib/utils/pathUtils.js'
+  import { t } from '$lib/translations'
 
   export let text: string | undefined
   export let json: unknown | undefined
@@ -18,7 +19,7 @@
   export let onChangeMode: OnChangeMode
   export let onClick: () => void
 
-  $: action = readOnly ? 'View' : 'Edit'
+  $: action = readOnly ? $t('modes.view') : $t('modes.edit')
 
   let nestedArrayPaths: JSONPath[]
   $: nestedArrayPaths = json
@@ -29,18 +30,20 @@
   $: hasNestedArrays = !isEmpty(nestedArrayPaths)
   $: isEmptyDocument = json === undefined && (text === '' || text === undefined)
 
-  $: documentType = hasNestedArrays
-    ? 'Object with nested arrays'
-    : isEmptyDocument
-      ? 'An empty document'
-      : isJSONObject(json)
-        ? 'An object'
-        : isJSONArray(json)
-          ? 'An empty array' // note: can also be an array with objects but without properties
-          : `A ${valueType(json, parser)}`
-
   function countItems(nestedArrayPath: JSONPath): number {
     return (getIn(json, nestedArrayPath) as JSONPath).length
+  }
+
+  function getDocumentTypeString(): string {
+    return hasNestedArrays
+      ? $t('modes.table_title_object_nested_array')
+      : isEmptyDocument
+        ? $t('modes.table_title_empty_document')
+        : isJSONObject(json)
+          ? $t('modes.table_title_object')
+          : isJSONArray(json)
+            ? $t('modes.table_title_empty_array') // note: can also be an array with objects but without properties
+            : `A ${valueType(json, parser)}`
   }
 </script>
 
@@ -48,18 +51,18 @@
   <div class="jse-space jse-before"></div>
 
   <div class="jse-nested-arrays">
-    <div class="jse-nested-arrays-title">{documentType}</div>
+    <div class="jse-nested-arrays-title">{getDocumentTypeString()}</div>
     <div class="jse-nested-arrays-info">
       {#if hasNestedArrays}
-        An object cannot be opened in table mode. You can open a nested array instead, or open the
-        document in tree mode.
+        {$t('modes.table_nested_array_info1')}
       {:else}
-        {documentType} cannot be opened in table mode.
+        {getDocumentTypeString()} {$t('modes.table_nested_array_info2')}
       {/if}
       {#if isEmptyDocument && !readOnly}
-        You can open the document in tree mode instead, or paste a JSON Array using <b>Ctrl+V</b>.
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('modes.table_nested_array_info3')}
       {:else}
-        You can open the document in tree mode instead.
+        {$t('modes.table_nested_array_info4')}
       {/if}
     </div>
     {#each nestedArrayPaths as nestedArrayPath}
@@ -75,7 +78,8 @@
       </button>
     {/each}
     <button type="button" class="jse-nested-array-action" on:click={() => onChangeMode(Mode.tree)}>
-      {action} in tree mode
+      {action}
+      {$t('modes.table_nested_array_info5')}
     </button>
   </div>
 

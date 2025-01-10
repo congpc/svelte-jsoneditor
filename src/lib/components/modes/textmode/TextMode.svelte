@@ -124,6 +124,7 @@
   import { indentationMarkers } from '@replit/codemirror-indentation-markers'
   import { isTextSelection } from '$lib/logic/selection.js'
   import { wrappedLineIndent } from 'codemirror-wrapped-line-indent'
+  import { t } from '$lib/translations'
 
   export let readOnly: boolean
   export let mainMenuBar: boolean
@@ -778,7 +779,7 @@
         isRepairable && !readOnly
           ? [
               {
-                name: 'Auto repair',
+                name: $t('modes.auto_repair'),
                 apply: () => handleRepair()
               }
             ]
@@ -1074,8 +1075,8 @@
 
   const repairActionShowMe = {
     icon: faEye,
-    text: 'Show me',
-    title: 'Move to the parse error location',
+    text: $t('modes.show_me'),
+    title: $t('modes.show_me_title'),
     onClick: handleShowMe
   }
 
@@ -1084,8 +1085,8 @@
       ? [
           {
             icon: faWrench,
-            text: 'Auto repair',
-            title: 'Automatically repair JSON',
+            text: $t('modes.auto_repair'),
+            title: $t('modes.auto_repair_title'),
             onClick: handleRepair
           },
           repairActionShowMe
@@ -1125,28 +1126,24 @@
       <Message
         icon={faExclamationTriangle}
         type="error"
-        message={`The JSON document is larger than ${formatSize(
+        message={`${$t('modes.text_error_large_1')} ${formatSize(
           MAX_DOCUMENT_SIZE_TEXT_MODE,
           1024
-        )}, ` +
-          `and may crash your browser when loading it in text mode. Actual size: ${formatSize(
-            text.length,
-            1024
-          )}.`}
+        )}, ` + `${$t('modes.text_error_large_2')} ${formatSize(text.length, 1024)}.`}
         actions={[
           {
-            text: 'Open anyway',
-            title: 'Open the document in text mode. This may freeze or crash your browser.',
+            text: $t('modes.open_anyway'),
+            title: $t('modes.open_anyway_title'),
             onClick: handleAcceptTooLarge
           },
           {
-            text: 'Open in tree mode',
-            title: 'Open the document in tree mode. Tree mode can handle large documents.',
+            text: $t('modes.open_tree_mode'),
+            title: $t('modes.open_tree_mode_title'),
             onClick: handleSwitchToTreeMode
           },
           {
-            text: 'Cancel',
-            title: 'Cancel opening this large document.',
+            text: $t('modes.cancel'),
+            title: $t('modes.cancel_title'),
             onClick: cancelLoadTooLarge
           }
         ]}
@@ -1177,18 +1174,18 @@
       {#if !jsonParseError && askToFormatApplied && needsFormatting(text)}
         <Message
           type="success"
-          message="Do you want to format the JSON?"
+          message={$t('modes.text_confirm_format')}
           actions={[
             {
               icon: faJSONEditorFormat,
-              text: 'Format',
-              title: 'Format JSON: add proper indentation and new lines (Ctrl+I)',
+              text: $t('modes.format'),
+              title: $t('modes.format_title'),
               onClick: handleFormat
             },
             {
               icon: faTimes,
-              text: 'No thanks',
-              title: 'Close this message',
+              text: $t('modes.no_thank'),
+              title: $t('modes.no_thank_title'),
               onClick: () => (askToFormatApplied = false)
             }
           ]}
@@ -1201,7 +1198,7 @@
   {:else}
     <div class="jse-contents">
       <div class="jse-loading-space"></div>
-      <div class="jse-loading">loading...</div>
+      <div class="jse-loading">{$t('modes.loading')}</div>
     </div>
   {/if}
 </div>

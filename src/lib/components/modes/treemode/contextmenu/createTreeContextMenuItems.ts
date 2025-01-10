@@ -36,6 +36,8 @@ import { initial, isEmpty } from 'lodash-es'
 import { getIn } from 'immutable-json-patch'
 import { isObject, isObjectOrArray } from '$lib/utils/typeUtils'
 import { getEnforceString } from '$lib/logic/documentState'
+import { get } from 'svelte/store'
+import { t } from '$lib/translations'
 
 export default function ({
   json,
@@ -83,10 +85,10 @@ export default function ({
   const rootSelected = selection ? isEmpty(getFocusPath(selection)) : false
   const focusValue = selection ? getIn(json, getFocusPath(selection)) : undefined
   const editValueText = Array.isArray(focusValue)
-    ? 'Edit array'
+    ? get(t)('modes.edit_array_text')
     : isObject(focusValue)
-      ? 'Edit object'
-      : 'Edit value'
+      ? get(t)('modes.edit_object_text')
+      : get(t)('modes.edit_value_text')
 
   const hasSelectionContents =
     hasJson &&
@@ -148,8 +150,8 @@ export default function ({
           type: 'button',
           onClick: () => onEditKey(),
           icon: faPen,
-          text: 'Edit key',
-          title: 'Edit the key (Double-click on the key)',
+          text: get(t)('modes.edit_key_text'),
+          title: get(t)('modes.edit_key_title'),
           disabled: !canEditKey
         },
         {
@@ -159,7 +161,7 @@ export default function ({
             onClick: () => onEditValue(),
             icon: faPen,
             text: editValueText,
-            title: 'Edit the value (Double-click on the value)',
+            title: get(t)('modes.edit_value_title'),
             disabled: !canEditValue
           },
           width: '11em',
@@ -168,15 +170,15 @@ export default function ({
               type: 'button',
               icon: faPen,
               text: editValueText,
-              title: 'Edit the value (Double-click on the value)',
+              title: get(t)('modes.edit_value_title'),
               onClick: () => onEditValue(),
               disabled: !canEditValue
             },
             {
               type: 'button',
               icon: enforceString ? faCheckSquare : faSquare,
-              text: 'Enforce string',
-              title: 'Enforce keeping the value as string when it contains a numeric value',
+              text: get(t)('modes.enforce_string_text'),
+              title: get(t)('modes.enforce_string_title'),
               onClick: () => onToggleEnforceString(),
               disabled: !canEnforceString
             }
@@ -194,8 +196,8 @@ export default function ({
             type: 'button',
             onClick: () => onCut(true),
             icon: faCut,
-            text: 'Cut',
-            title: 'Cut selected contents, formatted with indentation (Ctrl+X)',
+            text: get(t)('modes.cut_text'),
+            title: get(t)('modes.cut_formatted_title'),
             disabled: !canCut
           },
           width: '10em',
@@ -203,16 +205,16 @@ export default function ({
             {
               type: 'button',
               icon: faCut,
-              text: 'Cut formatted',
-              title: 'Cut selected contents, formatted with indentation (Ctrl+X)',
+              text: get(t)('modes.cut_formatted_text'),
+              title: get(t)('modes.cut_formatted_title'),
               onClick: () => onCut(true),
               disabled: !canCut
             },
             {
               type: 'button',
               icon: faCut,
-              text: 'Cut compacted',
-              title: 'Cut selected contents, without indentation (Ctrl+Shift+X)',
+              text: get(t)('modes.cut_compacted_text'),
+              title: get(t)('modes.cut_compacted_title'),
               onClick: () => onCut(false),
               disabled: !canCut
             }
@@ -224,8 +226,8 @@ export default function ({
             type: 'button',
             onClick: () => onCopy(true),
             icon: faCopy,
-            text: 'Copy',
-            title: 'Copy selected contents, formatted with indentation (Ctrl+C)',
+            text: get(t)('modes.copy_text'),
+            title: get(t)('modes.copy_formatted_title'),
             disabled: !canCopy
           },
           width: '12em',
@@ -233,16 +235,16 @@ export default function ({
             {
               type: 'button',
               icon: faCopy,
-              text: 'Copy formatted',
-              title: 'Copy selected contents, formatted with indentation (Ctrl+C)',
+              text: get(t)('modes.copy_formatted_text'),
+              title: get(t)('modes.copy_formatted_title'),
               onClick: () => onCopy(true),
               disabled: !canCopy
             },
             {
               type: 'button',
               icon: faCopy,
-              text: 'Copy compacted',
-              title: 'Copy selected contents, without indentation (Ctrl+Shift+C)',
+              text: get(t)('modes.copy_compacted_text'),
+              title: get(t)('modes.copy_compacted_title'),
               onClick: () => onCopy(false),
               disabled: !canCopy
             }
@@ -252,8 +254,8 @@ export default function ({
           type: 'button',
           onClick: () => onPaste(),
           icon: faPaste,
-          text: 'Paste',
-          title: 'Paste clipboard contents (Ctrl+V)',
+          text: get(t)('modes.paste_text'),
+          title: get(t)('modes.paste_title'),
           disabled: !canPaste
         }
       ]
@@ -269,40 +271,40 @@ export default function ({
               type: 'button',
               onClick: () => onDuplicate(),
               icon: faClone,
-              text: 'Duplicate',
-              title: 'Duplicate selected contents (Ctrl+D)',
+              text: get(t)('modes.duplicate_text'),
+              title: get(t)('modes.duplicate_title'),
               disabled: !canDuplicate
             },
             {
               type: 'button',
               onClick: () => onExtract(),
               icon: faCropAlt,
-              text: 'Extract',
-              title: 'Extract selected contents',
+              text: get(t)('modes.extract_text'),
+              title: get(t)('modes.extract_title'),
               disabled: !canExtract
             },
             {
               type: 'button',
               onClick: () => onSort(),
               icon: faSortAmountDownAlt,
-              text: 'Sort',
-              title: 'Sort array or object contents',
+              text: get(t)('modes.sort_text'),
+              title: get(t)('modes.sort_title'),
               disabled: readOnly || !hasSelectionContents
             },
             {
               type: 'button',
               onClick: () => onTransform(),
               icon: faFilter,
-              text: 'Transform',
-              title: 'Transform array or object contents (filter, sort, project)',
+              text: get(t)('modes.transform_text'),
+              title: get(t)('modes.transform_title'),
               disabled: readOnly || !hasSelectionContents
             },
             {
               type: 'button',
               onClick: () => onRemove(),
               icon: faTrashCan,
-              text: 'Remove',
-              title: 'Remove selected contents (Delete)',
+              text: get(t)('modes.remove_text'),
+              title: get(t)('modes.remove_title'),
               disabled: readOnly || !hasSelectionContents
             }
           ]
@@ -315,32 +317,32 @@ export default function ({
               type: 'button',
               onClick: () => handleInsertOrConvert('structure'),
               icon: convertMode ? faArrowRightArrowLeft : faPlus,
-              text: 'Structure',
-              title: insertOrConvertText + ' structure like the first item in the array',
+              text: get(t)('modes.structure_text'),
+              title: insertOrConvertText + get(t)('modes.structure_title'),
               disabled: !canInsertOrConvertStructure
             },
             {
               type: 'button',
               onClick: () => handleInsertOrConvert('object'),
               icon: convertMode ? faArrowRightArrowLeft : faPlus,
-              text: 'Object',
-              title: insertOrConvertText + ' object',
+              text: get(t)('modes.object_text'),
+              title: insertOrConvertText + get(t)('modes.object_title'),
               disabled: !canInsertOrConvertObject
             },
             {
               type: 'button',
               onClick: () => handleInsertOrConvert('array'),
               icon: convertMode ? faArrowRightArrowLeft : faPlus,
-              text: 'Array',
-              title: insertOrConvertText + ' array',
+              text: get(t)('modes.array_text'),
+              title: insertOrConvertText + get(t)('modes.array_title'),
               disabled: !canInsertOrConvertArray
             },
             {
               type: 'button',
               onClick: () => handleInsertOrConvert('value'),
               icon: convertMode ? faArrowRightArrowLeft : faPlus,
-              text: 'Value',
-              title: insertOrConvertText + ' value',
+              text: get(t)('modes.value_text'),
+              title: insertOrConvertText + get(t)('modes.value_title'),
               disabled: !canInsertOrConvertValue
             }
           ]

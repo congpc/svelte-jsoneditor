@@ -33,6 +33,7 @@
   import { getFocusPath, isJSONSelection } from '$lib/logic/selection.js'
   import Modal from './Modal.svelte'
   import AbsolutePopup from './popup/AbsolutePopup.svelte'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:JSONEditorModal')
 
@@ -85,7 +86,9 @@
 
   $: currentState = last(stack) || rootState
   $: absolutePath = stack.flatMap((state) => state.relativePath)
-  $: pathDescription = !isEmpty(absolutePath) ? stringifyJSONPath(absolutePath) : '(document root)'
+  $: pathDescription = !isEmpty(absolutePath)
+    ? stringifyJSONPath(absolutePath)
+    : $t('modals.document_root')
 
   // not relevant in this Modal setting, but well
   $: parseMemoizeOne = memoizeOne(parser.parse)
@@ -220,7 +223,7 @@
   <div class="jse-modal-wrapper">
     <AbsolutePopup>
       <Header
-        title="Edit nested content {stack.length > 1 ? ` (${stack.length})` : ''}"
+        title={`${$t('modals.edit_nested_content')} ${stack.length > 1 ? ` (${stack.length})` : ''}`}
         fullScreenButton={true}
         bind:fullscreen
         onClose={handleClose}
@@ -228,18 +231,18 @@
 
       <div class="jse-modal-contents">
         <div class="jse-label">
-          <div class="jse-label-inner">Path</div>
+          <div class="jse-label-inner">{$t('modals.path')}</div>
         </div>
         <input
           class="jse-path"
           type="text"
           readonly
-          title="Selected path"
+          title={$t('modals.selected_path')}
           value={pathDescription}
         />
 
         <div class="jse-label">
-          <div class="jse-label-inner">Contents</div>
+          <div class="jse-label-inner">{$t('modals.contents')}</div>
         </div>
 
         <div class="jse-modal-inline-editor">
@@ -289,15 +292,18 @@
 
           {#if stack.length > 1}
             <button type="button" class="jse-secondary" on:click={handleClose}>
-              <Icon data={faCaretLeft} /> Back
+              <Icon data={faCaretLeft} />
+              {$t('modals.back')}
             </button>
           {/if}
           {#if !readOnly}
             <button type="button" class="jse-primary" on:click={handleApply} use:focus>
-              Apply
+              {$t('modals.apply')}
             </button>
           {:else}
-            <button type="button" class="jse-primary" on:click={handleClose}> Close </button>
+            <button type="button" class="jse-primary" on:click={handleClose}>
+              {$t('modals.close')}
+            </button>
           {/if}
         </div>
       </div>

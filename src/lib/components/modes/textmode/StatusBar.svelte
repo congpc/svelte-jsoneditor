@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EditorState, Line } from '@codemirror/state'
+  import { t } from '$lib/translations'
 
   export let editorState: EditorState | undefined
 
@@ -23,15 +24,15 @@
 
 <div class="jse-status-bar">
   {#if lineNumber !== undefined}
-    <div class="jse-status-bar-info">Line: {lineNumber}</div>
+    <div class="jse-status-bar-info">{$t('modes.statusbar_line', { default: lineNumber })}</div>
   {/if}
 
   {#if columnNumber !== undefined}
-    <div class="jse-status-bar-info">Column: {columnNumber}</div>
+    <div class="jse-status-bar-info">{$t('modes.statusbar_column', { default: columnNumber })}</div>
   {/if}
 
   {#if charCount !== undefined && charCount > 0}
-    <div class="jse-status-bar-info">Selection: {charCount} characters</div>
+    <div class="jse-status-bar-info">{$t('modes.statusbar_selection', { default: charCount })}</div>
   {/if}
 </div>
 

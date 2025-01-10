@@ -13,6 +13,7 @@
   import { createDebug } from '$lib/utils/debug.js'
   import type { OnSort } from '$lib/types.js'
   import Modal from './Modal.svelte'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:SortModal')
 
@@ -29,11 +30,11 @@
 
   const asc = {
     value: 1,
-    label: 'ascending'
+    label: $t('modals.ascending')
   }
   const desc = {
     value: -1,
-    label: 'descending'
+    label: $t('modals.descending')
   }
   const directions = [asc, desc]
 
@@ -76,7 +77,10 @@
 </script>
 
 <Modal {onClose} className="jse-sort-modal">
-  <Header title={jsonIsArray ? 'Sort array items' : 'Sort object keys'} {onClose} />
+  <Header
+    title={jsonIsArray ? $t('modals.sort_array_items') : $t('modals.sort_object_keys')}
+    {onClose}
+  />
 
   <div class="jse-modal-contents">
     <table>
@@ -86,29 +90,29 @@
       </colgroup>
       <tbody>
         <tr>
-          <th>Path</th>
+          <th>{$t('modals.path')}</th>
           <td>
             <input
               class="jse-path"
               type="text"
               readonly
-              title="Selected path"
+              title={$t('modals.selected_path')}
               value={rootPath && !isEmpty(rootPath)
                 ? stringifyJSONPath(rootPath)
-                : '(document root)'}
+                : $t('modals.document_root')}
             />
           </td>
         </tr>
         {#if jsonIsArray && ((properties && properties?.length > 1) || selectedProperty === undefined)}
           <tr>
-            <th>Property</th>
+            <th>{$t('modals.property')}</th>
             <td>
               <Select showChevron items={properties} bind:value={selectedProperty} />
             </td>
           </tr>
         {/if}
         <tr>
-          <th>Direction</th>
+          <th>{$t('modals.direction')}</th>
           <td>
             <Select
               showChevron
@@ -137,7 +141,7 @@
         use:focus
         disabled={jsonIsArray && properties && properties?.length > 1 ? !selectedProperty : false}
       >
-        Sort
+        {$t('modals.sort')}
       </button>
     </div>
   </div>

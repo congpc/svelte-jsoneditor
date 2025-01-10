@@ -11,6 +11,7 @@
   import { faJSONEditorCompact, faJSONEditorFormat } from '$lib/img/customFontawesomeIcons.js'
   import Menu from '../../../controls/Menu.svelte'
   import type { MenuItem, OnRenderMenuInternal } from '$lib/types'
+  import { t } from '$lib/translations'
 
   export let readOnly = false
   export let onFormat: () => boolean
@@ -31,7 +32,7 @@
   const searchItem: MenuItem = {
     type: 'button',
     icon: faSearch,
-    title: 'Search (Ctrl+F)',
+    title: $t('modes.menu_search') || 'Search (Ctrl+F)',
     className: 'jse-search',
     onClick: onToggleSearch
   }
@@ -42,7 +43,9 @@
         {
           type: 'button',
           icon: faJSONEditorFormat,
-          title: 'Format JSON: add proper indentation and new lines (Ctrl+I)',
+          title:
+            $t('modes.menu_jse_format') ||
+            'Format JSON: add proper indentation and new lines (Ctrl+I)',
           className: 'jse-format',
           onClick: onFormat,
           disabled: readOnly || !canFormat
@@ -50,7 +53,9 @@
         {
           type: 'button',
           icon: faJSONEditorCompact,
-          title: 'Compact JSON: remove all white spacing and new lines (Ctrl+Shift+I)',
+          title:
+            $t('modes.menu_jse_compact') ||
+            'Compact JSON: remove all white spacing and new lines (Ctrl+Shift+I)',
           className: 'jse-compact',
           onClick: onCompact,
           disabled: readOnly || !canCompact
@@ -61,7 +66,7 @@
         {
           type: 'button',
           icon: faSortAmountDownAlt,
-          title: 'Sort',
+          title: $t('modes.menu_sort') || 'Sort',
           className: 'jse-sort',
           onClick: onSort,
           disabled: readOnly || !canSort
@@ -69,7 +74,8 @@
         {
           type: 'button',
           icon: faFilter,
-          title: 'Transform contents (filter, sort, project)',
+          title:
+            $t('modes.menu_transform_contents') || 'Transform contents (filter, sort, project)',
           className: 'jse-transform',
           onClick: onTransform,
           disabled: readOnly || !canTransform
@@ -81,7 +87,7 @@
         {
           type: 'button',
           icon: faUndo,
-          title: 'Undo (Ctrl+Z)',
+          title: $t('modes.menu_undo') || 'Undo (Ctrl+Z)',
           className: 'jse-undo',
           onClick: onUndo,
           disabled: !canUndo
@@ -89,7 +95,7 @@
         {
           type: 'button',
           icon: faRedo,
-          title: 'Redo (Ctrl+Shift+Z)',
+          title: $t('modes.menu_redo') || 'Redo (Ctrl+Shift+Z)',
           className: 'jse-redo',
           onClick: onRedo,
           disabled: !canRedo

@@ -593,6 +593,7 @@ export interface JSONEditorPropsOptional {
   indentation?: number | string
   tabSize?: number
   mode?: Mode
+  localeLanguage?: string
   mainMenuBar?: boolean
   navigationBar?: boolean
   statusBar?: boolean

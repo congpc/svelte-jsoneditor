@@ -40,6 +40,7 @@
   import { cloneDeep } from 'lodash-es'
   import { createHistoryInstance } from '$lib/logic/history'
   import { createDebug } from '$lib/utils/debug'
+  import { t } from '$lib/translations'
 
   export let content: Content
   export let selection: JSONEditorSelection | undefined
@@ -151,26 +152,36 @@
     }
   }
 
+  function getModeString(mode: string) {
+    return $t(`modes.mode_${mode}`)
+  }
+
   let modeMenuItems: MenuItem[]
   $: modeMenuItems = [
     {
       type: 'button',
-      text: 'text',
-      title: `Switch to text mode (current mode: ${mode})`,
+      text: $t('modes.mode_text') || 'text',
+      title:
+        $t('modes.mode_text_title', { default: getModeString(mode) }) ||
+        `Switch to text mode (current mode: ${mode})`,
       className: 'jse-group-button jse-first' + (mode === Mode.text ? ' jse-selected' : ''),
       onClick: () => onChangeMode(Mode.text)
     },
     {
       type: 'button',
-      text: 'tree',
-      title: `Switch to tree mode (current mode: ${mode})`,
+      text: $t('modes.mode_tree') || 'tree',
+      title:
+        $t('modes.mode_tree_title', { default: getModeString(mode) }) ||
+        `Switch to tree mode (current mode: ${mode})`,
       className: 'jse-group-button ' + (mode === Mode.tree ? ' jse-selected' : ''),
       onClick: () => onChangeMode(Mode.tree)
     },
     {
       type: 'button',
-      text: 'table',
-      title: `Switch to table mode (current mode: ${mode})`,
+      text: $t('modes.mode_table') || 'table',
+      title:
+        $t('modes.mode_table_title', { default: getModeString(mode) }) ||
+        `Switch to table mode (current mode: ${mode})`,
       className: 'jse-group-button jse-last' + (mode === Mode.table ? ' jse-selected' : ''),
       onClick: () => onChangeMode(Mode.table)
     }

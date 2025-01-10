@@ -11,7 +11,7 @@
     faSortAmountDownAlt,
     faUndo
   } from '@fortawesome/free-solid-svg-icons'
-  import { CONTEXT_MENU_EXPLANATION } from '$lib/constants.js'
+  import { t } from '$lib/translations'
 
   export let containsValidArray: boolean
   export let readOnly: boolean
@@ -34,7 +34,7 @@
         {
           type: 'button',
           icon: faSortAmountDownAlt,
-          title: 'Sort',
+          title: $t('modes.menu_sort') || 'Sort',
           className: 'jse-sort',
           onClick: onSort,
           disabled: readOnly || !containsValidArray
@@ -42,7 +42,8 @@
         {
           type: 'button',
           icon: faFilter,
-          title: 'Transform contents (filter, sort, project)',
+          title:
+            $t('modes.menu_transform_contents') || 'Transform contents (filter, sort, project)',
           className: 'jse-transform',
           onClick: onTransform,
           disabled: readOnly || !containsValidArray
@@ -50,7 +51,7 @@
         {
           type: 'button',
           icon: faSearch,
-          title: 'Search (Ctrl+F)',
+          title: $t('modes.menu_search') || 'Search (Ctrl+F)',
           className: 'jse-search',
           onClick: handleToggleSearch,
           disabled: !containsValidArray
@@ -58,7 +59,9 @@
         {
           type: 'button',
           icon: faEllipsisV,
-          title: CONTEXT_MENU_EXPLANATION,
+          title:
+            $t('modes.menu_context_explanation') ||
+            'Open context menu (Click here, right click on the selection, or use the context menu button or Ctrl+Q)',
           className: 'jse-contextmenu',
           onClick: onContextMenu
         },
@@ -68,7 +71,7 @@
         {
           type: 'button',
           icon: faUndo,
-          title: 'Undo (Ctrl+Z)',
+          title: $t('modes.menu_undo') || 'Undo (Ctrl+Z)',
           className: 'jse-undo',
           onClick: onUndo,
           disabled: !history.canUndo
@@ -76,7 +79,7 @@
         {
           type: 'button',
           icon: faRedo,
-          title: 'Redo (Ctrl+Shift+Z)',
+          title: $t('modes.menu_redo') || 'Redo (Ctrl+Shift+Z)',
           className: 'jse-redo',
           onClick: onRedo,
           disabled: !history.canRedo

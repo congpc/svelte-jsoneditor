@@ -9,6 +9,7 @@
   import type { JSONPath } from 'immutable-json-patch'
   import { setIn } from 'immutable-json-patch'
   import type { PathOption, QueryLanguageOptions } from '$lib/types.js'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:TransformWizard')
 
@@ -29,8 +30,8 @@
   }))
 
   const sortDirectionOptions = [
-    { value: 'asc', label: 'ascending' },
-    { value: 'desc', label: 'descending' }
+    { value: 'asc', label: $t('modals.ascending') },
+    { value: 'desc', label: $t('modals.descending') }
   ]
 
   // TODO: the binding with the select boxes is very cumbersome. Can we simplify this?
@@ -110,7 +111,7 @@
 <table class="jse-transform-wizard">
   <tbody>
     <tr>
-      <th>Filter</th>
+      <th>{$t('modals.filter')}</th>
       <td>
         <div class="jse-horizontal">
           <Select
@@ -131,7 +132,7 @@
       </td>
     </tr>
     <tr>
-      <th>Sort</th>
+      <th>{$t('modals.sort')}</th>
       <td>
         <div class="jse-horizontal">
           <Select class="jse-sort-path" showChevron items={fieldOptions} bind:value={sortPath} />
@@ -146,7 +147,7 @@
       </td>
     </tr>
     <tr>
-      <th>Pick</th>
+      <th>{$t('modals.pick')}</th>
       <td>
         <div class="jse-horizontal">
           <Select

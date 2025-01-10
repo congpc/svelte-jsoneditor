@@ -7,6 +7,7 @@
   import SelectQueryLanguage from '../controls/selectQueryLanguage/SelectQueryLanguage.svelte'
   import type { AbsolutePopupContext, OnChangeQueryLanguage, QueryLanguage } from '$lib/types.js'
   import Header from './Header.svelte'
+  import { t } from '$lib/translations'
 
   export let queryLanguages: QueryLanguage[]
   export let queryLanguageId: string
@@ -39,7 +40,7 @@
   }
 </script>
 
-<Header title="Transform" fullScreenButton={true} bind:fullscreen {onClose}>
+<Header title={$t('modals.transform')} fullScreenButton={true} bind:fullscreen {onClose}>
   <button
     slot="actions"
     type="button"

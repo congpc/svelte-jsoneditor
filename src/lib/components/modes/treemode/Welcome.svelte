@@ -1,6 +1,8 @@
 <svelte:options immutable={true} />
 
 <script lang="ts">
+  import { t } from '$lib/translations'
+
   export let readOnly: boolean
   export let onCreateArray: () => void
   export let onCreateObject: () => void
@@ -10,18 +12,18 @@
 <div class="jse-welcome" on:click={() => onClick()} role="none">
   <div class="jse-space jse-before"></div>
   <div class="jse-contents">
-    <div class="jse-welcome-title">Empty document</div>
+    <div class="jse-welcome-title">{$t('modes.tree_welcome_title')}</div>
     {#if !readOnly}
       <div class="jse-welcome-info">
-        You can paste clipboard data using <b>Ctrl+V</b>, or use the following options:
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('modes.tree_welcome_info')}
       </div>
       <button
-        title={"Create an empty JSON object (press '{')"}
-        on:click|stopPropagation={() => onCreateObject()}>Create object</button
+        title={$t('modes.true_button_object')}
+        on:click|stopPropagation={() => onCreateObject()}>{$t('modes.tree_create_object')}</button
       >
-      <button
-        title={"Create an empty JSON array (press '[')"}
-        on:click|stopPropagation={() => onCreateArray()}>Create array</button
+      <button title={$t('modes.true_button_array')} on:click|stopPropagation={() => onCreateArray()}
+        >{$t('modes.tree_create_array')}</button
       >
     {/if}
   </div>

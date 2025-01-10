@@ -50,10 +50,12 @@
   import memoizeOne from 'memoize-one'
   import { cloneDeep } from 'lodash-es'
   import SortModal from './modals/SortModal.svelte'
+  import { loadTranslations } from '$lib/translations'
 
   // TODO: document how to enable debugging in the readme: localStorage.debug="jsoneditor:*", then reload
   const debug = createDebug('jsoneditor:JSONEditor')
 
+  const localeLanguageDefault = 'en'
   const contentDefault = { text: '' }
   const selectionDefault = undefined
   const readOnlyDefault = false
@@ -92,6 +94,7 @@
   const onBlurDefault = noop
 
   export let content: Content = contentDefault
+  export let localeLanguage: string = localeLanguageDefault
   export let selection: JSONEditorSelection | undefined = selectionDefault
   export let readOnly: boolean = readOnlyDefault
   export let indentation: number | string = indentationDefault
@@ -128,6 +131,9 @@
   let jsonEditorModalProps: JSONEditorModalProps | undefined = undefined
   let sortModalProps: SortModalCallback | undefined
   let transformModalProps: TransformModalProps | undefined
+
+  // Load translations
+  loadTranslations(localeLanguage)
 
   $: {
     const contentError = validateContentType(content)
@@ -197,6 +203,16 @@
     content = updatedContent
 
     await tick() // await rerender
+  }
+
+  /**
+   * Set locale language
+   * @param newLang The new local language value
+   */
+  export async function setLocaleLanguage(newLang: string) {
+    debug('Set locale language:', newLang)
+    localeLanguage = newLang
+    await loadTranslations(newLang) // await rerender translation
   }
 
   export async function patch(operations: JSONPatchDocument): Promise<JSONPatchResult> {
@@ -281,11 +297,13 @@
 
   export async function updateProps(props: JSONEditorPropsOptional): Promise<void> {
     const names = Object.keys(props) as (keyof JSONEditorPropsOptional)[]
-
     for (const name of names) {
       switch (name) {
         case 'content':
           content = props[name] ?? contentDefault
+          break
+        case 'localeLanguage':
+          await setLocaleLanguage(props[name] ?? localeLanguageDefault)
           break
         case 'selection':
           selection = props[name] ?? selectionDefault

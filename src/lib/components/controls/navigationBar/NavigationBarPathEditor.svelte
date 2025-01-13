@@ -7,6 +7,7 @@
   import { keyComboFromEvent } from '$lib/utils/keyBindings.js'
   import { tooltip } from '../../controls/tooltip/tooltip.js'
   import type { AbsolutePopupContext, JSONPathParser, OnError } from '$lib/types.js'
+  import { t } from '$lib/translations'
 
   const absolutePopupContext = getContext<AbsolutePopupContext>('absolute-popup')
 
@@ -119,7 +120,7 @@
     </button>
   {/if}
   {#if copied}
-    <div class="jse-copied-text">Copied!</div>
+    <div class="jse-copied-text">{$t('controls.copied')}</div>
   {/if}
   <button
     type="button"

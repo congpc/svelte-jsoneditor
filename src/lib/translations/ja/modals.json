@@ -2,6 +2,7 @@
   "sort_object_keys": "オブジェクト キーを並べ替える",
   "sort_array_items": "配列項目を並べ替える",
   "property": "プロパティ",
+  "property_placeholder": "選択してください",
   "direction": "方向",
   "ascending": "昇順",
   "descending": "降順",

@@ -3,12 +3,9 @@
 <script lang="ts">
   import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
   import Icon from 'svelte-awesome'
-  import {
-    CONTEXT_MENU_EXPLANATION,
-    CONTEXT_MENU_HEIGHT,
-    CONTEXT_MENU_WIDTH
-  } from '$lib/constants.js'
+  import { CONTEXT_MENU_HEIGHT, CONTEXT_MENU_WIDTH } from '$lib/constants.js'
   import type { OnContextMenu } from '$lib/types'
+  import { t } from '$lib/translations'
 
   export let root: boolean = false
   export let insert: boolean = false
@@ -42,7 +39,7 @@
   class:jse-root={root}
   class:jse-insert={insert}
   class:jse-selected={selected}
-  title={CONTEXT_MENU_EXPLANATION}
+  title={$t('modes.menu_context_explanation')}
   on:click={handleClick}
 >
   <Icon data={faCaretDown} />

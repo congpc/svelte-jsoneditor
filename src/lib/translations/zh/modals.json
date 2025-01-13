@@ -2,6 +2,7 @@
   "sort_object_keys": "對物件鍵進行排序",
   "sort_array_items": "對陣列項目進行排序",
   "property": "屬性",
+  "property_placeholder": "請選擇",
   "direction": "方向",
   "升序": "升序",
   "降序": "降序",

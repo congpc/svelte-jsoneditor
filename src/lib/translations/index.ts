@@ -14,6 +14,11 @@ const config = {
       loader: async () => (await import('./en/modes.json')).default
     },
     {
+      locale: 'en',
+      key: 'controls',
+      loader: async () => (await import('./en/controls.json')).default
+    },
+    {
       locale: 'ja',
       key: 'modals',
       loader: async () => (await import('./ja/modals.json')).default
@@ -24,6 +29,11 @@ const config = {
       loader: async () => (await import('./ja/modes.json')).default
     },
     {
+      locale: 'ja',
+      key: 'controls',
+      loader: async () => (await import('./ja/controls.json')).default
+    },
+    {
       locale: 'zh',
       key: 'modals',
       loader: async () => (await import('./zh/modals.json')).default
@@ -32,8 +42,14 @@ const config = {
       locale: 'zh',
       key: 'modes',
       loader: async () => (await import('./zh/modes.json')).default
+    },
+    {
+      locale: 'zh',
+      key: 'controls',
+      loader: async () => (await import('./zh/controls.json')).default
     }
-  ], fallbackLocale: 'en',
+  ],
+  fallbackLocale: 'en'
 }
 
 export const { t, locale, locales, loading, loadTranslations } = new i18n(config)

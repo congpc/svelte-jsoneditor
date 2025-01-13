@@ -107,7 +107,12 @@
           <tr>
             <th>{$t('modals.property')}</th>
             <td>
-              <Select showChevron items={properties} bind:value={selectedProperty} />
+              <Select
+                showChevron
+                items={properties}
+                bind:value={selectedProperty}
+                placeholder={$t('modals.property_placeholder')}
+              />
             </td>
           </tr>
         {/if}

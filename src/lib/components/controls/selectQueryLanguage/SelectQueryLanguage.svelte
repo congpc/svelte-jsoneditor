@@ -2,6 +2,7 @@
   import Icon from 'svelte-awesome'
   import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons'
   import type { QueryLanguage, OnChangeQueryLanguage } from '$lib/types.js'
+  import { t } from '$lib/translations'
 
   export let queryLanguages: QueryLanguage[]
   export let queryLanguageId: string
@@ -21,7 +22,7 @@
         on:click={() => handleChangeQueryLanguage(queryLanguage.id)}
         class="jse-query-language"
         class:selected={queryLanguage.id === queryLanguageId}
-        title={`Select ${queryLanguage.name} as query language`}
+        title={$t('controls.select_query_language', { default: queryLanguage.name })}
       >
         {#if queryLanguage.id === queryLanguageId}
           <Icon data={faCheckSquare} />

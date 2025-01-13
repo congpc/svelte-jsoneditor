@@ -1,0 +1,7 @@
+{
+  "navigation_bar": "導覽列",
+  "navigation_bar_cancel_title": "取消編輯選取的路徑",
+  "navigation_bar_edit_title": "編輯選取的路徑",
+  "copied": "已複製！",
+  "select_query_language": "選擇 {{query_name}} 作為查詢語言"
+}

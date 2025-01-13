@@ -2,6 +2,7 @@
   "sort_object_keys": "Sort object keys",
   "sort_array_items": "Sort array items",
   "property": "Property",
+  "property_placeholder": "Please select",
   "direction": "Direction",
   "ascending": "ascending",
   "descending": "descending",

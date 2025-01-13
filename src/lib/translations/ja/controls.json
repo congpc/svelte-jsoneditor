@@ -1,0 +1,7 @@
+{
+  "navigation_bar": "ナビゲーション バー",
+  "navigation_bar_cancel_title": "選択したパスの編集をキャンセル",
+  "navigation_bar_edit_title": "選択したパスを編集",
+  "copied": "コピーしました！",
+  "select_query_language": "クエリ言語として {{query_name}} を選択してください"
+}

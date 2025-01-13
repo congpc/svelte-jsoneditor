@@ -1,0 +1,7 @@
+{
+  "navigation_bar": "Navigation bar",
+  "navigation_bar_cancel_title": "Cancel editing the selected path",
+  "navigation_bar_edit_title": "Edit the selected path",
+  "copied": "Copied!",
+  "select_query_language": "Select {{query_name}} as query language"
+}

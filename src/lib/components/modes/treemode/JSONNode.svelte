@@ -10,8 +10,7 @@
     DEFAULT_VISIBLE_SECTIONS,
     HOVER_COLLECTION,
     HOVER_INSERT_AFTER,
-    HOVER_INSERT_INSIDE,
-    INSERT_EXPLANATION
+    HOVER_INSERT_INSIDE
   } from '$lib/constants.js'
   import { getEnforceString, getVisibleCaretPositions } from '$lib/logic/documentState.js'
   import { rename } from '$lib/logic/operations.js'
@@ -74,6 +73,7 @@
   import { isObject } from '$lib/utils/typeUtils.js'
   import { classnames } from '$lib/utils/cssUtils.js'
   import { isCtrlKeyDown } from 'svelte-jsoneditor/utils/keyBindings'
+  import { t } from '$lib/translations'
 
   // We pass `pointer` instead of `path` because pointer (a string) is immutable.
   // Without it, *all* nodes would re-render on *every* change in JSON or DocumentState,
@@ -658,7 +658,7 @@
             class:jse-selected={isNodeSelected && isInsideSelection(selection)}
             data-type="insert-selection-area-inside"
             style:--level={path.length + 1}
-            title={INSERT_EXPLANATION}
+            title={$t('modes.menu_insert_explanation')}
           >
             <ContextMenuPointer
               insert={true}
@@ -790,7 +790,7 @@
             class:jse-selected={isNodeSelected && isInsideSelection(selection)}
             data-type="insert-selection-area-inside"
             style:--level={path.length + 1}
-            title={INSERT_EXPLANATION}
+            title={$t('modes.menu_insert_explanation')}
           >
             <ContextMenuPointer
               insert={true}
@@ -902,7 +902,7 @@
       class:jse-hovered={hover === HOVER_INSERT_AFTER}
       class:jse-selected={isNodeSelected && isAfterSelection(selection)}
       data-type="insert-selection-area-after"
-      title={INSERT_EXPLANATION}
+      title={$t('modes.menu_insert_explanation')}
     >
       <ContextMenuPointer
         insert={true}

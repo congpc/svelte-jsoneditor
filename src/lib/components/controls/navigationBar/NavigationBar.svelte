@@ -13,6 +13,7 @@
   import { faClose, faEdit } from '@fortawesome/free-solid-svg-icons'
   import NavigationBarItem from './NavigationBarItem.svelte'
   import NavigationBarPathEditor from './NavigationBarPathEditor.svelte'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:NavigationBar')
 
@@ -114,12 +115,16 @@
     class="jse-navigation-bar-edit"
     class:flex={!editing}
     class:editing
-    title={editing ? 'Cancel editing the selected path' : 'Edit the selected path'}
+    title={editing
+      ? $t('controls.navigation_bar_cancel_title') || 'Cancel editing the selected path'
+      : $t('controls.navigation_bar_edit_title') || 'Edit the selected path'}
     on:click={toggleEditing}
   >
     <span class="jse-navigation-bar-space">
       <!-- ensure the right height (arrows have less height than the text) -->
-      {!isObjectOrArray(json) && !editing ? 'Navigation bar' : '\u00A0'}
+      {!isObjectOrArray(json) && !editing
+        ? $t('controls.navigation_bar') || 'Navigation bar'
+        : '\u00A0'}
     </span>
 
     <Icon data={editing ? faClose : faEdit} />

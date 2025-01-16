@@ -3,5 +3,17 @@
   "navigation_bar_cancel_title": "選択したパスの編集をキャンセル",
   "navigation_bar_edit_title": "選択したパスを編集",
   "copied": "コピーしました！",
-  "select_query_language": "クエリ言語として {{query_name}} を選択してください"
+  "select_query_language": "クエリ言語として {{query_name}} を選択してください",
+  "replace_toggle_title": "置換オプションの表示を切り替える (Ctrl+H)",
+  "text_search_title": "検索するテキストを入力",
+  "text_search_placeholder": "検索",
+  "search_next_title": "次の検索結果に移動 (Enter)",
+  "search_previous_title": "前の検索結果に移動 (Shift+Enter)",
+  "search_clear_title": "検索ボックスを閉じる (Esc)",
+  "text_replace_title": "置換テキストを入力",
+  "text_replace_placeholder": "置換",
+  "replace_button_title": "現在の出現箇所を置換 (Ctrl+Enter)",
+  "replace_button": "置換",
+  "replace_all_button_title": "すべての出現箇所を置換",
+  "replace_all_button": "すべて"
 }

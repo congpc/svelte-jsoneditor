@@ -3,5 +3,17 @@
   "navigation_bar_cancel_title": "Cancel editing the selected path",
   "navigation_bar_edit_title": "Edit the selected path",
   "copied": "Copied!",
-  "select_query_language": "Select {{query_name}} as query language"
+  "select_query_language": "Select {{query_name}} as query language",
+  "replace_toggle_title": "Toggle visibility of replace options (Ctrl+H)",
+  "text_search_title": "Enter text to search",
+  "text_search_placeholder": "Find",
+  "search_next_title": "Go to next search result (Enter)",
+  "search_previous_title": "Go to previous search result (Shift+Enter)",
+  "search_clear_title": "Close search box (Esc)",
+  "text_replace_title": "Enter replacement text",
+  "text_replace_placeholder": "Replace",
+  "replace_button_title": "Replace current occurrence (Ctrl+Enter)",
+  "replace_button": "Replace",
+  "replace_all_button_title": "Replace all occurrences",
+  "replace_all_button": "All"
 }

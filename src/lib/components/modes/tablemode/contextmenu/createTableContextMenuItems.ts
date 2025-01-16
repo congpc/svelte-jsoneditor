@@ -211,7 +211,7 @@ export default function ({
               onClick: () => onInsertBeforeRow(),
               icon: faPlus,
               text: get(t)('modes.insert_before'),
-              title: get(t)('modes.insert_before_title'),
+              title: get(t)('modes.menu_table_insert_before_title'),
               disabled: readOnly || !hasSelection || !hasJson
             },
             {
@@ -219,7 +219,7 @@ export default function ({
               onClick: () => onInsertAfterRow(),
               icon: faPlus,
               text: get(t)('modes.insert_after'),
-              title: get(t)('modes.insert_after_title'),
+              title: get(t)('modes.menu_table_insert_after_title'),
               disabled: readOnly || !hasSelection || !hasJson
             },
             {

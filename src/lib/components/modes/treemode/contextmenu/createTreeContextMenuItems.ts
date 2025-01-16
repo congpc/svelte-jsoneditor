@@ -116,7 +116,9 @@ export default function ({
     !rootSelected // must not be root
 
   const convertMode = hasSelectionContents
-  const insertOrConvertText = convertMode ? 'Convert to:' : 'Insert:'
+  const insertOrConvertText = convertMode
+    ? get(t)('modes.convert_to_label')
+    : get(t)('modes.insert_label')
 
   const canInsertOrConvertStructure =
     !readOnly &&
@@ -359,16 +361,16 @@ export default function ({
           type: 'button',
           onClick: () => onInsertBefore(),
           icon: faCaretSquareUp,
-          text: 'Insert before',
-          title: 'Select area before current entry to insert or paste contents',
+          text: get(t)('modes.insert_before'),
+          title: get(t)('modes.menu_tree_insert_before_title'),
           disabled: readOnly || !hasSelectionContents || rootSelected
         },
         {
           type: 'button',
           onClick: () => onInsertAfter(),
           icon: faCaretSquareDown,
-          text: 'Insert after',
-          title: 'Select area after current entry to insert or paste contents',
+          text: get(t)('modes.insert_after'),
+          title: get(t)('modes.menu_tree_insert_after_title'),
           disabled: readOnly || !hasSelectionContents || rootSelected
         }
       ]

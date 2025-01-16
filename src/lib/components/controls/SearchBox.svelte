@@ -26,6 +26,7 @@
   } from '$lib/logic/search.js'
   import type { JSONPath } from 'immutable-json-patch'
   import { tick } from 'svelte'
+  import { t } from '$lib/translations'
 
   const debug = createDebug('jsoneditor:SearchBox')
 
@@ -284,7 +285,7 @@
         <button
           type="button"
           class="jse-replace-toggle"
-          title="Toggle visibility of replace options (Ctrl+H)"
+          title={$t('controls.replace_toggle_title')}
           on:click={toggleShowReplace}
         >
           <Icon data={showReplace ? faCaretDown : faCaretRight} />
@@ -302,9 +303,9 @@
           <label class="jse-search-input-label" about="jse-search input">
             <input
               class="jse-search-input"
-              title="Enter text to search"
+              title={$t('controls.text_search_title')}
               type="text"
-              placeholder="Find"
+              placeholder={$t('controls.text_search_placeholder')}
               bind:value={text}
               use:initSearchInput
               on:paste={handlePaste}
@@ -318,7 +319,7 @@
           <button
             type="button"
             class="jse-search-next"
-            title="Go to next search result (Enter)"
+            title={$t('controls.search_next_title')}
             on:click={handleNext}
           >
             <Icon data={faChevronDown} />
@@ -326,7 +327,7 @@
           <button
             type="button"
             class="jse-search-previous"
-            title="Go to previous search result (Shift+Enter)"
+            title={$t('controls.search_previous_title')}
             on:click={handlePrevious}
           >
             <Icon data={faChevronUp} />
@@ -334,7 +335,7 @@
           <button
             type="button"
             class="jse-search-clear"
-            title="Close search box (Esc)"
+            title={$t('controls.search_clear_title')}
             on:click={handleClose}
           >
             <Icon data={faTimes} />
@@ -344,19 +345,21 @@
           <div class="jse-replace-section">
             <input
               class="jse-replace-input"
-              title="Enter replacement text"
+              title={$t('controls.text_replace_title')}
               type="text"
-              placeholder="Replace"
+              placeholder={$t('controls.text_replace_placeholder')}
               bind:value={replaceText}
               on:keydown={handleReplaceKeyDown}
             />
             <button
               type="button"
-              title="Replace current occurrence (Ctrl+Enter)"
-              on:click={handleReplace}>Replace</button
+              title={$t('controls.replace_button_title')}
+              on:click={handleReplace}>{$t('controls.replace_button')}</button
             >
-            <button type="button" title="Replace all occurrences" on:click={handleReplaceAll}
-              >All</button
+            <button
+              type="button"
+              title={$t('controls.replace_all_button_title')}
+              on:click={handleReplaceAll}>{$t('controls.replace_all_button')}</button
             >
           </div>
         {/if}

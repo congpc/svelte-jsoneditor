@@ -3,5 +3,17 @@
   "navigation_bar_cancel_title": "取消編輯選取的路徑",
   "navigation_bar_edit_title": "編輯選取的路徑",
   "copied": "已複製！",
-  "select_query_language": "選擇 {{query_name}} 作為查詢語言"
+  "select_query_language": "選擇 {{query_name}} 作為查詢語言",
+  "replace_toggle_title": "切換替換選項的可見性（Ctrl+H）",
+  "text_search_title": "輸入要搜尋的文字",
+  "text_search_placeholder": "找",
+  "search_next_title": "到下一個搜尋結果 (Enter)",
+  "search_previous_title": "到上一個搜尋結果 (Shift+Enter)",
+  "search_clear_title": "關閉搜尋框（Esc）",
+  "text_replace_title": "輸入替換文字",
+  "text_replace_placeholder": "替換",
+  "replace_button_title": "取代目前出現的內容 (Ctrl+Enter)",
+  "replace_button": "替換",
+  "replace_all_button_title": "替換所有出現的內容",
+  "replace_all_button": "全部"
 }
